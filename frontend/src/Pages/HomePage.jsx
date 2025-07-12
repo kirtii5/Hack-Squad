@@ -63,11 +63,11 @@ export default function HomePage() {
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-16">
-      {/* Search Bar under Navbar */}
-      <div className="bg-white px-6 py-5 flex flex-col sm:flex-row gap-4 items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white pt-16">
+      {/* Filter & Search Bar */}
+      <div className="px-4 sm:px-0 py-5 flex flex-col sm:flex-row gap-4 items-center justify-center">
         <Select>
-          <SelectTrigger className="w-[200px] border-gray-300">
+          <SelectTrigger className="w-[200px] border-gray-300 rounded-md">
             <SelectValue placeholder="Availability" />
           </SelectTrigger>
           <SelectContent>
@@ -78,10 +78,10 @@ export default function HomePage() {
 
         <Input
           placeholder="Search for skills (e.g., Photoshop)"
-          className="w-[300px] border-gray-300"
+          className="w-[300px] border-gray-300 rounded-md"
         />
 
-        <Button className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-2">
+        <Button className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-2 rounded-md shadow-sm">
           Search
         </Button>
       </div>
@@ -91,7 +91,7 @@ export default function HomePage() {
         {currentUsers.map((user, i) => (
           <div
             key={i}
-            className="bg-white border border-gray-200 rounded-xl shadow-md p-5 flex items-center gap-4 hover:shadow-lg transition-all"
+            className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-xl hover:scale-[1.01] transition-all p-5 flex items-center gap-6"
           >
             <img
               src={user.avatar}
@@ -99,7 +99,7 @@ export default function HomePage() {
               className="w-16 h-16 rounded-full border border-purple-200"
             />
             <div className="flex-1">
-              <h2 className="text-lg font-bold text-gray-800">{user.name}</h2>
+              <h2 className="text-xl font-semibold text-gray-800">{user.name}</h2>
               <p className="text-sm text-purple-700 mt-1">
                 <span className="font-medium">Offering:</span>{" "}
                 {user.offered.join(", ")}
