@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 import UserProfile from './routes/UserProfile.js';
+import Feedback from './routes/Feedback.js';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(cors({
 }));
 
 app.use("/profile", UserProfile);
+app.use('/feedback', Feedback);
 
 app.use((err, req, res, next) => {
   console.log(err.stack);
