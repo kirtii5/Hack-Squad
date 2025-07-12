@@ -1,11 +1,18 @@
-// src/pages/Login.jsx
 import React from "react";
 import { SignIn } from "@clerk/clerk-react";
 
 export default function Login() {
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-2 sm:px-4 bg-gray-50">
-      <SignIn redirectUrl="/" />
+    <div className="min-h-screen pt-24 px-4 bg-black text-white relative overflow-hidden">
+      {/* Gradient blurred background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-700 
+                      bg-[length:200%_200%] animate-gradient-x blur-2xl opacity-20 z-0" />
+
+      <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-96px)]">
+        <div className="w-full max-w-md">
+          <SignIn redirectUrl="/" />
+        </div>
+      </div>
     </div>
   );
 }
