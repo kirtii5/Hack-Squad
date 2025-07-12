@@ -14,8 +14,13 @@ export default function UserProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-purple-900 via-gray-900 to-black text-white flex items-center justify-center p-6">
-      <div className="w-full max-w-6xl rounded-3xl bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-2xl border border-gray-700 p-10">
+    <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-black text-white">
+      {/* 🌈 Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-700 
+                      bg-[length:200%_200%] animate-gradient-x blur-2xl opacity-20 z-0" />
+
+      {/* 🌟 Profile Card Content */}
+      <div className="relative z-10 w-full max-w-6xl rounded-3xl bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-2xl border border-gray-700 p-10">
         <div className="flex flex-col md:flex-row justify-between items-center mb-10">
           <h2 className="text-4xl font-extrabold tracking-wide text-purple-300 mb-4 md:mb-0">Skill Swap Profile</h2>
           <div className="flex flex-wrap gap-3">
@@ -32,7 +37,6 @@ export default function UserProfile() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {}
           <div className="space-y-6">
             <div>
               <label className="text-sm text-gray-300 mb-1 block">Name</label>
@@ -85,7 +89,6 @@ export default function UserProfile() {
             </div>
           </div>
 
-          {}
           <div className="flex flex-col items-center">
             <div className="w-48 h-48 rounded-full border-4 border-purple-500 flex items-center justify-center overflow-hidden bg-gray-800 shadow-xl">
               <img
