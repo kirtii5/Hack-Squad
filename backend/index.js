@@ -1,9 +1,9 @@
-import dotenv from 'dotenv';
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
 
-import UserProfile from './routes/UserProfile.js';
+import UserProfile from "./routes/UserProfile.js";
 
 dotenv.config();
 
@@ -15,15 +15,17 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('MongoDB is connected successfully'))
+  .then(() => console.log("MongoDB is connected successfully"))
   .catch((err) => console.error(err));
 
 app.use(express.json());
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use("/profile", UserProfile);
 
@@ -35,5 +37,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+  console.log(`Server is listening on port http://localhost:${PORT}`);
 });

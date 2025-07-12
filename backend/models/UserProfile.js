@@ -5,31 +5,35 @@ const UserProfileSchema = new mongoose.Schema(
     clerkId: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     location: {
       type: String,
-      default: ""
+      default: "",
     },
     skillsOffered: {
       type: [String],
-      default: []
+      default: [],
     },
     skillsWanted: {
       type: [String],
-      default: []
+      default: [],
     },
     availability: {
       type: String,
-      default: ""
+      default: "",
     },
     isPublic: {
       type: Boolean,
-      default: true
+      default: true,
     },
     profilePhoto: {
       type: String,
-    }
+    },
+    rating: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
