@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import UserProfile from './routes/UserProfile.js';
 import SwapRequest from './models/SwapRequest.js';
+import Feedback from './routes/Feedback.js';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(cors({
 
 app.use("/profile", UserProfile);
 app.use('/swap', SwapRequest);
+app.use('/feedback', Feedback);
 
 app.use((err, req, res, next) => {
   console.log(err.stack);
