@@ -37,111 +37,114 @@ export default function HomePage() {
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white pt-16">
-      {/* Filter & Search Bar */}
-      <div className="px-4 sm:px-0 py-5 flex flex-col sm:flex-row gap-4 items-center justify-center">
-        <Select>
-          <SelectTrigger className="w-[200px] border-gray-300 rounded-md">
-            <SelectValue placeholder="Availability" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="weekends">Weekends</SelectItem>
-            <SelectItem value="evenings">Evenings</SelectItem>
-          </SelectContent>
-        </Select>
+    <div  className="min-h-screen flex flex-col items-center justify-start p-6 pt-20 relative overflow-hidden bg-black text-white">
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-700 
+                      bg-[length:200%_200%] animate-gradient-x blur-2xl opacity-20 z-0" />
+      <div className="relative z-10 w-full max-w-5xl rounded-3xl bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-2xl border border-gray-700 p-10">
 
-        <Input
-          placeholder="Search for skills"
-          className="w-[300px] border-gray-300 rounded-md"
-        />
+        {/* Filter & Search */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-5 mb-10">
+          <Select>
+            <SelectTrigger className="w-[200px] bg-gray-700 border border-gray-600 text-white rounded-xl">
+              <SelectValue placeholder="Availability" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="weekends">Weekends</SelectItem>
+              <SelectItem value="evenings">Evenings</SelectItem>
+            </SelectContent>
+          </Select>
 
-        <Button className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-2 rounded-md shadow-sm">
-          Search
-        </Button>
-      </div>
+          <Input
+            placeholder="Search for skills"
+            className="w-[300px] bg-gray-700 border border-gray-600 text-white rounded-xl placeholder-gray-400"
+          />
 
-      {/* User Cards */}
-      <main className="max-w-3xl mx-auto px-4 py-10 space-y-6">
-        {currentUsers.map((user, i) => (
-          <Link
-            key={i}
-            to={`/user/${user.clerkId}`}
-            className="block"
-          >
-            <div className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-xl hover:scale-[1.01] transition-all p-5 flex items-center gap-6 cursor-pointer">
-              <img
-                src={user.profilePhoto || "https://placehold.co/100"}
-                alt={user.name || "User"}
-                className="w-16 h-16 rounded-full border border-purple-200"
-              />
-              <div className="flex-1">
-                <h2 className="text-xl font-semibold text-gray-800">
-                  {user.name || "User"}
-                </h2>
-                <p className="text-sm text-purple-700 mt-1">
-                  <span className="font-medium">Offering:</span>{" "}
-                  {user.skillsOffered?.join(", ")}
-                </p>
-                <p className="text-sm text-indigo-600">
-                  <span className="font-medium">Wants:</span>{" "}
-                  {user.skillsWanted?.join(", ")}
-                </p>
-                <div className="flex gap-6 mt-1 text-sm">
-                  <p className="text-gray-500">
+          <Button className="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-xl font-medium text-white">
+            Search
+          </Button>
+        </div>
+
+        {/* User Cards */}
+        <div className="space-y-6">
+          {currentUsers.map((user, i) => (
+            <Link
+              key={i}
+              to={`/user/${user.clerkId}`}
+              className="block transition hover:scale-[1.01]"
+            >
+              <div className="bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-6 flex items-center gap-6">
+                <img
+                  src={user.profilePhoto || "https://placehold.co/100"}
+                  alt={user.name || "User"}
+                  className="w-16 h-16 rounded-full border-2 border-purple-400"
+                />
+                <div className="flex-1">
+                  <h2 className="text-xl font-bold text-purple-300">
+                    {user.name || "User"}
+                  </h2>
+                  <p className="text-sm text-blue-400 mt-1">
+                    <span className="font-medium">Offering:</span>{" "}
+                    {user.skillsOffered?.join(", ")}
+                  </p>
+                  <p className="text-sm text-pink-400">
+                    <span className="font-medium">Wants:</span>{" "}
+                    {user.skillsWanted?.join(", ")}
+                  </p>
+                  <p className="text-sm text-gray-400 mt-1">
                     <span className="font-medium">Availability:</span>{" "}
                     {user.availability}
                   </p>
                 </div>
+                <div className="flex flex-col items-end">
+                  <Button className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm px-4 py-1 rounded-md">
+                    Request
+                  </Button>
+                  <p className="text-yellow-300 text-sm mt-1 font-medium">
+                    Rating: {user.rating || 0}/5
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-col items-end">
-  <Button className="bg-purple-700 hover:bg-purple-800 text-white text-sm px-4 py-1 rounded-md">
-    Request
-  </Button>
-  <p className="text-yellow-600 text-sm mt-1 font-medium">
-    Rating: {user.rating || 0}/5
-  </p>
-</div>
-            </div>
-          </Link>
-        ))}
-      </main>
+            </Link>
+          ))}
+        </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center items-center gap-2 pb-16">
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className="px-3 py-1 text-gray-600 hover:text-purple-700 disabled:opacity-40"
-        >
-          &lt;
-        </button>
+        {/* Pagination */}
+        <div className="flex justify-center items-center gap-2 mt-10">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-3 py-1 text-white hover:text-purple-400 disabled:opacity-30"
+          >
+            &lt;
+          </button>
 
-        {[...Array(totalPages)].map((_, index) => {
-          const page = index + 1;
-          return (
-            <button
-              key={page}
-              onClick={() => handlePageChange(page)}
-              className={`px-3 py-1 text-sm rounded-md border ${
-                currentPage === page
-                  ? "bg-purple-700 text-white border-purple-700"
-                  : "text-gray-700 border-gray-300 hover:bg-purple-100"
-              }`}
-            >
-              {page}
-            </button>
-          );
-        })}
+          {[...Array(totalPages)].map((_, index) => {
+            const page = index + 1;
+            return (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`px-3 py-1 text-sm rounded-md border font-medium ${
+                  currentPage === page
+                    ? "bg-purple-700 text-white border-purple-600"
+                    : "text-gray-300 border-gray-600 hover:bg-purple-800"
+                }`}
+              >
+                {page}
+              </button>
+            );
+          })}
 
-        <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          disabled={currentPage === totalPages}
-          className="px-3 py-1 text-gray-600 hover:text-purple-700 disabled:opacity-40"
-        >
-          &gt;
-        </button>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 text-white hover:text-purple-400 disabled:opacity-30"
+          >
+            &gt;
+          </button>
+        </div>
       </div>
     </div>
   );

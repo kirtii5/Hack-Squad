@@ -1,4 +1,3 @@
-// src/pages/AuthPage.jsx
 import React, { useState } from "react";
 import { SignIn, SignUp } from "@clerk/clerk-react";
 
