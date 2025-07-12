@@ -1,106 +1,106 @@
 import React, { useState } from "react";
 
-const UserProfile = () => {
-  const [skillsOffered, setSkillsOffered] = useState([]);
-  const [skillsWanted, setSkillsWanted] = useState([]);
-  const [photoPreview, setPhotoPreview] = useState(null);
+export default function UserProfile() {
+  const [skillsOffered, setSkillsOffered] = useState(["Javascript", "CSS", "HTML"]);
+  const [skillsWanted, setSkillsWanted] = useState(["java", "Python","C++"]);
+  const [availability, setAvailability] = useState("Weekends");
 
-  const handleSkillAdd = (type, e) => {
-    if (e.key === "Enter" && e.target.value.trim()) {
-      e.preventDefault();
-      const val = e.target.value.trim();
-      type === "offered"
-        ? setSkillsOffered([...skillsOffered, val])
-        : setSkillsWanted([...skillsWanted, val]);
-      e.target.value = "";
-    }
-  };
-
-  const removeSkill = (type, skill) => {
-    type === "offered"
-      ? setSkillsOffered(skillsOffered.filter(s => s !== skill))
-      : setSkillsWanted(skillsWanted.filter(s => s !== skill));
-  };
-
-  const handlePhotoUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setPhotoPreview(URL.createObjectURL(file));
+  const removeSkill = (skill, type) => {
+    if (type === "offered") {
+      setSkillsOffered(skillsOffered.filter((s) => s !== skill));
+    } else {
+      setSkillsWanted(skillsWanted.filter((s) => s !== skill));
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-8 bg-gray-900 text-white rounded-xl shadow-lg">
-      <h1 className="text-3xl font-bold mb-6">Create Your Profile</h1>
-
-      <form className="space-y-6">
-        <div>
-          <label className="block text-gray-300">Name</label>
-          <input type="text" className="w-full p-3 rounded bg-gray-800 border border-gray-600" />
-        </div>
-
-        <div>
-          <label className="block text-gray-300">Location</label>
-          <input type="text" className="w-full p-3 rounded bg-gray-800 border border-gray-600" />
-        </div>
-
-        <div>
-          <label className="block text-gray-300 mb-2">Profile Photo</label>
-          <input type="file" accept="image/*" onChange={handlePhotoUpload} />
-          {photoPreview && (
-            <img src={photoPreview} alt="Preview" className="mt-4 w-24 h-24 rounded-full object-cover" />
-          )}
-        </div>
-
-        <div>
-          <label className="block text-gray-300">Skills Offered</label>
-          <input type="text" onKeyDown={(e) => handleSkillAdd("offered", e)} className="w-full p-3 rounded bg-gray-800 border border-gray-600" placeholder="Type and press Enter" />
-          <div className="flex flex-wrap mt-2 gap-2">
-            {skillsOffered.map(skill => (
-              <span key={skill} className="bg-green-600 px-3 py-1 rounded-full text-sm flex items-center">
-                {skill}
-                <button onClick={() => removeSkill("offered", skill)} className="ml-2 text-red-300">&times;</button>
-              </span>
-            ))}
+    <div className="min-h-screen bg-gradient-to-tr from-purple-900 via-gray-900 to-black text-white flex items-center justify-center p-6">
+      <div className="w-full max-w-6xl rounded-3xl bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-2xl border border-gray-700 p-10">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+          <h2 className="text-4xl font-extrabold tracking-wide text-purple-300 mb-4 md:mb-0">Skill Swap Profile</h2>
+          <div className="flex flex-wrap gap-3">
+            <button className="bg-green-500 hover:bg-green-600 transition px-5 py-2 rounded-xl font-medium">Save</button>
+            <button className="bg-red-500 hover:bg-red-600 transition px-5 py-2 rounded-xl font-medium">Discard</button>
+            <button className="bg-indigo-600 hover:bg-indigo-500 transition px-5 py-2 rounded-xl font-medium">Swap Request</button>
+            <button className="bg-pink-600 hover:bg-pink-500 transition px-5 py-2 rounded-xl font-medium">Home</button>
+            <img
+              src="https://api.dicebear.com/6.x/thumbs/svg?seed=User"
+              alt="avatar"
+              className="w-11 h-11 rounded-full border-2 border-purple-500"
+            />
           </div>
         </div>
 
-        <div>
-          <label className="block text-gray-300">Skills Wanted</label>
-          <input type="text" onKeyDown={(e) => handleSkillAdd("wanted", e)} className="w-full p-3 rounded bg-gray-800 border border-gray-600" placeholder="Type and press Enter" />
-          <div className="flex flex-wrap mt-2 gap-2">
-            {skillsWanted.map(skill => (
-              <span key={skill} className="bg-blue-600 px-3 py-1 rounded-full text-sm flex items-center">
-                {skill}
-                <button onClick={() => removeSkill("wanted", skill)} className="ml-2 text-red-300">&times;</button>
-              </span>
-            ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {}
+          <div className="space-y-6">
+            <div>
+              <label className="text-sm text-gray-300 mb-1 block">Name</label>
+              <input type="text" className="w-full px-5 py-3 bg-gray-700 text-white border border-gray-600 rounded-xl placeholder-gray-400" placeholder="Enter your name" />
+            </div>
+            <div>
+              <label className="text-sm text-gray-300 mb-1 block">Location <span className="text-xs text-gray-400">(optional)</span></label>
+              <input type="text" className="w-full px-5 py-3 bg-gray-700 text-white border border-gray-600 rounded-xl placeholder-gray-400" placeholder="City, Country" />
+            </div>
+            <div>
+              <label className="text-sm text-gray-300 mb-1 block">Skills Offered</label>
+              <div className="flex flex-wrap gap-2">
+                {skillsOffered.map((skill, i) => (
+                  <span key={i} className="flex items-center bg-blue-900 px-4 py-1.5 rounded-full text-sm border border-blue-400">
+                    {skill}
+                    <button onClick={() => removeSkill(skill, "offered")} className="ml-2 text-red-300 hover:text-red-500">&times;</button>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="text-sm text-gray-300 mb-1 block">Skills Wanted</label>
+              <div className="flex flex-wrap gap-2">
+                {skillsWanted.map((skill, i) => (
+                  <span key={i} className="flex items-center bg-purple-900 px-4 py-1.5 rounded-full text-sm border border-purple-400">
+                    {skill}
+                    <button onClick={() => removeSkill(skill, "wanted")} className="ml-2 text-red-300 hover:text-red-500">&times;</button>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="text-sm text-gray-300 mb-1 block">Availability</label>
+              <select
+                value={availability}
+                onChange={(e) => setAvailability(e.target.value)}
+                className="w-full px-5 py-3 bg-gray-700 text-white border border-gray-600 rounded-xl"
+              >
+                <option>Weekends</option>
+                <option>Evenings</option>
+                <option>Weekdays</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-sm text-gray-300 mb-1 block">Profile</label>
+              <select className="w-full px-5 py-3 bg-gray-700 text-white border border-gray-600 rounded-xl">
+                <option>Public</option>
+                <option>Private</option>
+              </select>
+            </div>
+          </div>
+
+          {}
+          <div className="flex flex-col items-center">
+            <div className="w-48 h-48 rounded-full border-4 border-purple-500 flex items-center justify-center overflow-hidden bg-gray-800 shadow-xl">
+              <img
+                src="https://api.dicebear.com/6.x/thumbs/svg?seed=User"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="mt-5 flex gap-5">
+              <button className="text-sm text-blue-400 hover:underline">Add / Edit</button>
+              <button className="text-sm text-red-400 hover:underline">Remove</button>
+            </div>
           </div>
         </div>
-
-        <div>
-          <label className="block text-gray-300">Availability</label>
-          <select className="w-full p-3 rounded bg-gray-800 border border-gray-600">
-            <option value="weekends">Weekends</option>
-            <option value="evenings">Evenings</option>
-            <option value="anytime">Anytime</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-gray-300">Profile Visibility</label>
-          <select className="w-full p-3 rounded bg-gray-800 border border-gray-600">
-            <option value="true">Public</option>
-            <option value="false">Private</option>
-          </select>
-        </div>
-
-        <button type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3 rounded font-semibold mt-6 transition-all">
-          Save Profile
-        </button>
-      </form>
+      </div>
     </div>
   );
-};
-
-export default UserProfile;
+}
