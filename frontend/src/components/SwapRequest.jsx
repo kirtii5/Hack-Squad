@@ -3,8 +3,7 @@ import React, { useState } from "react";
 export default function SwapRequestPage() {
   const [statusFilter, setStatusFilter] = useState("Pending");
   const [searchTerm, setSearchTerm] = useState("");
-
-  const mockRequests = [
+  const [requests, setRequests] = useState([
     {
       id: 1,
       name: "Marc Demo",
@@ -43,25 +42,33 @@ export default function SwapRequestPage() {
     },
     {
       id: 5,
-      name: "Leo Grant",
-      profileImage: "https://api.dicebear.com/6.x/thumbs/svg?seed=Leo",
-      skillsOffered: ["SQL", "Database Design"],
-      skillsWanted: ["Angular", "Vue.js"],
+      name: "David Kim",
+      profileImage: "https://api.dicebear.com/6.x/thumbs/svg?seed=David",
+      skillsOffered: ["Unity", "C#"],
+      skillsWanted: ["Java", "Python"],
       status: "Pending",
-      rating: 4.3,
+      rating: 4.4,
     },
-  ];
+  ]);
 
-  const filteredRequests = mockRequests.filter(
+  const handleStatusChange = (id, newStatus) => {
+    setRequests((prev) =>
+      prev.map((req) =>
+        req.id === id ? { ...req, status: newStatus } : req
+      )
+    );
+  };
+
+  const filteredRequests = requests.filter(
     (req) =>
       req.status === statusFilter &&
       req.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white font-mono transition-all duration-500 ease-in-out">
-      {/* Navbar */}
-      <div className="flex justify-between items-center px-6 py-4 border-b border-gray-700 animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-tr from-gray-900 via-black to-gray-800 text-white font-mono animate-fade-in">
+      
+      <div className="flex justify-between items-center px-6 py-4 border-b border-gray-700">
         <h1 className="text-xl font-bold text-purple-400">Skill Swap Platform</h1>
         <div className="flex items-center gap-4">
           <button className="underline">Home</button>
@@ -73,8 +80,8 @@ export default function SwapRequestPage() {
         </div>
       </div>
 
-      {/* Filter/Search Bar */}
-      <div className="flex flex-wrap items-center justify-between px-6 py-4 gap-4 animate-slide-in">
+      
+      <div className="flex flex-wrap items-center justify-between px-6 py-4 gap-4">
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
@@ -94,12 +101,12 @@ export default function SwapRequestPage() {
         />
       </div>
 
-      {/* Request Cards */}
+      
       <div className="px-6 space-y-6 pb-10">
         {filteredRequests.map((req) => (
           <div
             key={req.id}
-            className="border border-gray-700 rounded-xl p-6 flex items-center justify-between bg-gradient-to-r from-gray-800 via-gray-900 to-black shadow-lg transform transition duration-300 hover:scale-105"
+            className="border border-gray-700 rounded-xl p-6 flex items-center justify-between bg-gradient-to-r from-gray-800 via-gray-900 to-black shadow-lg transition-transform hover:scale-[1.01]"
           >
             <div className="flex items-center gap-6">
               <img
@@ -121,9 +128,19 @@ export default function SwapRequestPage() {
             <div className="text-right space-y-2">
               <p className="text-yellow-400 font-semibold">Status: {req.status}</p>
               {req.status === "Pending" && (
-                <div className="flex gap-2 justify-end">
-                  <button className="bg-green-600 px-3 py-1 text-white text-xs rounded">Accept</button>
-                  <button className="bg-red-600 px-3 py-1 text-white text-xs rounded">Reject</button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleStatusChange(req.id, "Accepted")}
+                    className="px-3 py-1 bg-green-600 hover:bg-green-700 rounded text-sm"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    onClick={() => handleStatusChange(req.id, "Rejected")}
+                    className="px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-sm"
+                  >
+                    Reject
+                  </button>
                 </div>
               )}
             </div>
