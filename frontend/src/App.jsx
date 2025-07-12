@@ -1,12 +1,16 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import UserProfile from "./components/UserProfile";
+import SwapRequest from "./components/SwapRequest";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <UserProfile />
-    </div>
+      <Routes>
+        <Route path="/" element={<UserProfile />} />
+        <Route path="/swap" element={<SwapRequest />} />
+      </Routes>
   );
 }
 
 export default App;
+
