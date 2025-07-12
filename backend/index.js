@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 import UserProfile from './routes/UserProfile.js';
-import SwapRequest from './models/SwapRequest.js';
+import SwapRequest from './routes/SwapRequest.js';
 import Feedback from './routes/Feedback.js';
 
 dotenv.config();
