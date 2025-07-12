@@ -1,5 +1,5 @@
 import React from "react";
-import UserProfile from "./components/UserProfile.jsx/index.js";
+import UserProfile from "./components/ui/UserProfile";
 
 function App() {
   return (
