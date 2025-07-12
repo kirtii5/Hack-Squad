@@ -1,0 +1,46 @@
+export const users = [
+  {
+    name: "Marc Demo",
+    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Marc",
+    offered: ["JavaScript", "Python"],
+    wanted: ["Photoshop", "Graphic Designer"],
+    availability: "Weekends",
+    rating: 3.9,
+    reviews: [
+      { name: "Kunal", message: "Very helpful and patient." },
+      { name: "Karishma", message: "Explains JS concepts clearly!" },
+    ],
+  },
+  {
+    name: "Michelle A.",
+    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Michelle",
+    offered: ["Excel", "Canva"],
+    wanted: ["React", "Node.js"],
+    availability: "Evenings",
+    rating: 4.5,
+  },
+  {
+    name: "Joe Wills",
+    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Joe",
+    offered: ["Photography", "Figma"],
+    wanted: ["Excel", "Illustrator"],
+    availability: "Weekends",
+    rating: 4.0,
+  },
+  {
+    name: "Ava L.",
+    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Ava",
+    offered: ["Web Design", "Illustrator"],
+    wanted: ["React", "MongoDB"],
+    availability: "Weekends",
+    rating: 4.6,
+  },
+  {
+    name: "Lucas K.",
+    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Lucas",
+    offered: ["SQL", "NoSQL"],
+    wanted: ["Graphic Design"],
+    availability: "Evenings",
+    rating: 4.2,
+  },
+];

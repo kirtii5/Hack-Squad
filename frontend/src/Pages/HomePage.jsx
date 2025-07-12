@@ -8,49 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-const users = [
-  {
-    name: "Marc Demo",
-    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Marc",
-    offered: ["JavaScript", "Python"],
-    wanted: ["Photoshop", "Graphic Designer"],
-    availability: "Weekends",
-    rating: 3.9,
-  },
-  {
-    name: "Michelle A.",
-    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Michelle",
-    offered: ["Excel", "Canva"],
-    wanted: ["React", "Node.js"],
-    availability: "Evenings",
-    rating: 4.5,
-  },
-  {
-    name: "Joe Wills",
-    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Joe",
-    offered: ["Photography", "Figma"],
-    wanted: ["Excel", "Illustrator"],
-    availability: "Weekends",
-    rating: 4.0,
-  },
-  {
-    name: "Ava L.",
-    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Ava",
-    offered: ["Web Design", "Illustrator"],
-    wanted: ["React", "MongoDB"],
-    availability: "Weekends",
-    rating: 4.6,
-  },
-  {
-    name: "Lucas K.",
-    avatar: "https://api.dicebear.com/6.x/pixel-art/svg?seed=Lucas",
-    offered: ["SQL", "NoSQL"],
-    wanted: ["Graphic Design"],
-    availability: "Evenings",
-    rating: 4.2,
-  },
-];
+import { users } from "@/data/users";
+import { Link } from "react-router-dom";
 
 const USERS_PER_PAGE = 3;
 
@@ -77,7 +36,7 @@ export default function HomePage() {
         </Select>
 
         <Input
-          placeholder="Search for skills (e.g., Photoshop)"
+          placeholder="Search for skills"
           className="w-[300px] border-gray-300 rounded-md"
         />
 
@@ -89,39 +48,44 @@ export default function HomePage() {
       {/* User Cards */}
       <main className="max-w-3xl mx-auto px-4 py-10 space-y-6">
         {currentUsers.map((user, i) => (
-          <div
+          <Link
             key={i}
-            className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-xl hover:scale-[1.01] transition-all p-5 flex items-center gap-6"
+            to={`/profile/${user.name.replace(/\s+/g, "")}`}
+            className="block"
           >
-            <img
-              src={user.avatar}
-              alt={user.name}
-              className="w-16 h-16 rounded-full border border-purple-200"
-            />
-            <div className="flex-1">
-              <h2 className="text-xl font-semibold text-gray-800">{user.name}</h2>
-              <p className="text-sm text-purple-700 mt-1">
-                <span className="font-medium">Offering:</span>{" "}
-                {user.offered.join(", ")}
-              </p>
-              <p className="text-sm text-indigo-600">
-                <span className="font-medium">Wants:</span>{" "}
-                {user.wanted.join(", ")}
-              </p>
-              <div className="flex gap-6 mt-1 text-sm">
-                <p className="text-gray-500">
-                  <span className="font-medium">Availability:</span>{" "}
-                  {user.availability}
+            <div className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-xl hover:scale-[1.01] transition-all p-5 flex items-center gap-6 cursor-pointer">
+              <img
+                src={user.avatar}
+                alt={user.name}
+                className="w-16 h-16 rounded-full border border-purple-200"
+              />
+              <div className="flex-1">
+                <h2 className="text-xl font-semibold text-gray-800">
+                  {user.name}
+                </h2>
+                <p className="text-sm text-purple-700 mt-1">
+                  <span className="font-medium">Offering:</span>{" "}
+                  {user.offered.join(", ")}
                 </p>
-                <p className="text-yellow-600 font-medium">
-                  Rating: {user.rating}/5
+                <p className="text-sm text-indigo-600">
+                  <span className="font-medium">Wants:</span>{" "}
+                  {user.wanted.join(", ")}
                 </p>
+                <div className="flex gap-6 mt-1 text-sm">
+                  <p className="text-gray-500">
+                    <span className="font-medium">Availability:</span>{" "}
+                    {user.availability}
+                  </p>
+                  <p className="text-yellow-600 font-medium">
+                    Rating: {user.rating}/5
+                  </p>
+                </div>
               </div>
+              <Button className="bg-purple-700 hover:bg-purple-800 text-white text-sm px-4 py-1 rounded-md">
+                Request
+              </Button>
             </div>
-            <Button className="bg-purple-700 hover:bg-purple-800 text-white text-sm px-4 py-1 rounded-md">
-              Request
-            </Button>
-          </div>
+          </Link>
         ))}
       </main>
 
