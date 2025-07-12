@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function UserProfile() {
   const { username } = useParams(); // this is clerkId
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -27,14 +28,19 @@ export default function UserProfile() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-100 to-white pt-20 px-6">
       <div className="max-w-5xl mx-auto bg-white shadow-md rounded-xl p-8 relative">
-        {/* Top Section */}
+
+        {/* Request Button */}
         <div className="absolute top-6 left-6">
-          <button className="bg-purple-700 text-white px-5 py-2 rounded hover:bg-purple-800">
+          <button
+            onClick={() => navigate(`/user/${user.clerkId}/request`)}
+            className="bg-purple-700 text-white px-5 py-2 rounded hover:bg-purple-800"
+          >
             Request
           </button>
           <h1 className="mt-6 text-3xl font-bold text-gray-800">{user.name || "User"}</h1>
         </div>
 
+        {/* Profile Photo */}
         <div className="absolute top-6 right-6">
           <img
             src={user.profilePhoto || "https://placehold.co/100"}
@@ -65,7 +71,7 @@ export default function UserProfile() {
         <div className="mt-12 border-t pt-6">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Rating & Feedback</h2>
           <p className="text-yellow-600 font-semibold text-lg">
-            Rating: {user.rating}/5
+            Rating: {user.rating || "No rating"}/5
           </p>
 
           {user.feedback && user.feedback.length > 0 ? (

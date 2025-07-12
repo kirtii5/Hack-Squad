@@ -2,8 +2,10 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
 
 import UserProfile from "./routes/UserProfile.js";
+import requestRoutes from "./routes/Request.js";
 
 dotenv.config();
 
@@ -27,7 +29,11 @@ app.use(
   })
 );
 
+app.use(ClerkExpressWithAuth());
+
 app.use("/profile", UserProfile);
+
+app.use("/requests", requestRoutes);
 
 app.use((err, req, res, next) => {
   console.log(err.stack);

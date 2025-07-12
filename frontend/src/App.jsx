@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import UserProfile from "@/pages/UserProfile";
+import RequestForm from "./pages/RequestForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="/user/:clerkId" element={<UserProfile />} /> */}
         <Route path="/user/:username" element={<UserProfile />} />
+        <Route path="/user/:clerkId/request" element={<RequestForm />} />
         <Route
           path="/dashboard"
           element={
