@@ -1,7 +1,12 @@
-require('dotenv').config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors")
+import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+
+import UserProfile from './routes/UserProfile.js';
+
+dotenv.config();
+
 const app = express();
 const { MONGO_URL, PORT } = process.env;
 
@@ -10,17 +15,25 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("MongoDB is  connected successfully"))
+  .then(() => console.log('MongoDB is connected successfully'))
   .catch((err) => console.error(err));
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+app.use(express.json());
 
 app.use(cors({
   origin: "http://localhost:5173",
   credentials: true
 }));
 
+app.use("/profile", UserProfile);
 
+app.use((err, req, res, next) => {
+  console.log(err.stack);
+  const status = err.status || 500;
+  const message = err.message || "Internal server error";
+  res.status(status).json({ message });
+});
 
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
